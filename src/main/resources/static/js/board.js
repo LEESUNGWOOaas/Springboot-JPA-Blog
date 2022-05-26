@@ -3,7 +3,9 @@ let index ={
 			$("#btn-save").on("click",()=>{ //function(){}, ()=>{} this를 바인딩 하기위해 function을 쓸꺼면  index 시작에 let_this = this;로 바인딩해서
 				this.save();
 			});//리스너를 만드는것
-		
+			$("#btn-delete").on("click",()=>{ 
+				this.deleteById();
+			});
 		},
 
 	save:function(){
@@ -28,6 +30,22 @@ let index ={
 			alert(JSON.stringify(error)); //에러를 json으로 날라오게 한다.
 		});//ajax통신을 이용해서 3개의 데이터를 json으로 변경해 insert 요청을 한다 
 	
+	},
+	
+	deleteById:function(){
+		//var id= $("#id").val(); id 값을 Text로 뽑아와야되는데 Value 값으로 가져와서 오류가 났다(405Error )
+		var id =$("#id").text();
+		$.ajax({
+			type:"DELETE",
+			url:"/api/board/"+id,
+			dataType:"json"					
+		}).done(function(resp){
+			console.log(resp);
+			alert("삭제가 되었습니다.");
+			location.href="/";
+		}).fail(function(error){
+			alert(JSON.stringify(error));
+		});
 	},
 	
 }
