@@ -7,6 +7,10 @@ let index ={
 			/*$("#btn-login").on("click",()=>{ //function(){}, ()=>{} this를 바인딩 하기위해 function을 쓸꺼면  index 시작에 let_this = this;로 바인딩해서
 				this.login();
 			});*/
+			$("#btn-update").on("click",()=>{ 
+				this.update();
+			});
+			
 		},
 
 	save:function(){
@@ -62,7 +66,32 @@ let index ={
 		});//ajax통신을 이용해서 3개의 데이터를 json으로 변경해 insert 요청을 한다 
 	}
 	*/
+	update:function(){
+		
+		let data={
+				id:$("#id").val(),
+				//username:$("#username").val(), readonly라 수정 안한다
+				password:$("#password").val(), //principal value로 가져온다
+				email:$("#email").val()
+		};
+		$.ajax({
+			
+			type:"PUT",
+			url:"/user",
+			data:JSON.stringify(data), 
+			contentType:"application/json; charset=utf-8", 
+			dataType:"json" 
+		}).done(function(resp){
+			
+			console.log(resp);
+			alert("회원수정이 되었습니다.");
+			location.href="/";
+		}).fail(function(error){
+			
+			alert(JSON.stringify(error)); 
+		});
 	
+	},
 }
 
 index.init();

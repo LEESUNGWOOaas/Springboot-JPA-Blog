@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,4 +43,10 @@ public class UserApiController {
 	 * } return new ResponseDto<Integer>(HttpStatus.OK.value(),1); // 세션 생성 후 1 응답하면
 	 * loginForm에서 user.JS 실행시 로그인이 완료되면 블로그로 이동 }
 	 */
+	
+	@PutMapping("/user")
+	public ResponseDto<Integer> update(@RequestBody User user){
+		userService.회원수정(user);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
+	}
 }
