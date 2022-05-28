@@ -70,7 +70,7 @@ let index ={
 		
 		let data={
 				id:$("#id").val(),
-				//username:$("#username").val(), readonly라 수정 안한다
+				username:$("#username").val(),
 				password:$("#password").val(), //principal value로 가져온다
 				email:$("#email").val()
 		};

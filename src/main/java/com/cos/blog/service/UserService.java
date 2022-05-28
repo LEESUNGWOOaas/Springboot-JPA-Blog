@@ -1,6 +1,10 @@
 package com.cos.blog.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +22,8 @@ public class UserService {
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 	
+	@Autowired
+	private AuthenticationManager authenticationManager;
 	@Transactional // 하나의 트랜잭션으로 묶임 
 	public void 회원가입(User user) {
 		String rawPassword = user.getPassword();//1234원문
@@ -44,7 +50,16 @@ public class UserService {
 		persistance.setPassword(encPassword);
 		persistance.setEmail(user.getEmail());
 		//회원 수정 함수 종료 = 서비스 종료 =트랜잭션 종료 =Commit 자동 완료 
+		
+		//세션등록  (오류 -> 종료되기 전에 변경된 패스워드를 날리고있다 )
+		/*
+		 * Authentication authentication = authenticationManager.authenticate(new
+		 * UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword()));
+		 * SecurityContextHolder.getContext().setAuthentication(authentication);
+		 */
 	}
+	
+
 	
 	/* 로그인은 시큐리티로 관리
 	 * @Transactional(readOnly = true)//select할 때 트랜잭션 시작,서비스 종료시 트랜잭션 종료 (정합성 유지)
