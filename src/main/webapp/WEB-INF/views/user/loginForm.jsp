@@ -15,6 +15,10 @@
 			<label class="form-check-label"> <input class="form-check-input" name="remember" type="checkbox"> Remember me</label>
 		</div> -->
 		<button id="btn-login" class="btn btn-primary">로그인</button>
+		<a href="https://kauth.kakao.com/oauth/authorize?
+client_id=16ebb6ebce26d641a9995960714e4765&
+redirect_uri=http://localhost:8001/auth/kakao/callback&
+response_type=code"><img height="38" src="/image/kakao_login_button.png"/></a>
 	</form>
 
 

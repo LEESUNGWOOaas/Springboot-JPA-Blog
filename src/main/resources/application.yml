@@ -27,7 +27,7 @@ spring:
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
       use-new-id-generator-mappings: false
@@ -38,3 +38,6 @@ spring:
   jackson:
     serialization:
       fail-on-empty-beans: false  
+
+cos:
+  key: cos1234  #카카오 로그인 (OAuth)을 하는 사람들이 회원가입이 될때 만들어 지는 패스워드를 다 저것으로 통일한다.

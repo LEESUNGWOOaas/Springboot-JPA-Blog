@@ -31,7 +31,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //넘버링 전략 프로젝트에서 연결된 DB의 넘버링 전략을 따라간다													// 오라클을 연결하면 시퀀스를 쓰고 mysql이면 auto_increment를 쓰는 것 
 	private int id;//시퀀스 , auto_increment
 	
-	@Column(nullable = false,length = 30) // null이 될수 없고 길이가 30자 까지 제한 
+	@Column(nullable = false,length = 300) // null이 될수 없고 길이가 300자 까지 제한 
 	private String username;//아이디
 	@Column(nullable = false,length = 300,unique=true)
 	private String password;
@@ -45,5 +45,9 @@ public class User {
 	private RoleType role;//Enum을 써야한다 Enum은 데이터의 도메인(어떤 범위)을 만든다 , admin,user,manager등 권한 타입이 string이면 오타를 낼수있다
 	@CreationTimestamp //시간이 자동 입력
 	private Timestamp createDate;
+	
+	//카카오 로그인인지 판단하는 부분 
+	private String oauth;
+	
 	
 }

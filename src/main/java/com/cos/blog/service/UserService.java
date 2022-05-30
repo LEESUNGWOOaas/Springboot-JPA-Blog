@@ -42,6 +42,9 @@ public class UserService {
 				.orElseThrow(()->{
 					return new IllegalArgumentException("회원 찾기 실패");
 				});
+		
+		//포스트 공격을 대비한 코드 Validate체크 (카카오 로그인은 수정 못함) 
+		if(persistance.getOauth() == null || persistance.getOauth().equals("")) {
 		//찾으면 오브젝트가 들어왔을때 
 		String rawPassword = user.getPassword();//사용자로 부터 비번을 받는다
 		//패스워드 암호화
@@ -57,6 +60,16 @@ public class UserService {
 		 * UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword()));
 		 * SecurityContextHolder.getContext().setAuthentication(authentication);
 		 */
+		}
+	}
+	
+	@Transactional(readOnly = true)
+	public User 회원찾기(String username) {
+	
+		User user= userRepository.findByUsername(username).orElseGet(()->{
+			return new User();
+		});
+		return user;
 	}
 	
 
