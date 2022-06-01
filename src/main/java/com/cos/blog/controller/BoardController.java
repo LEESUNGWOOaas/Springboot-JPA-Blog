@@ -21,7 +21,7 @@ public class BoardController {
 	@GetMapping({"","/"}) // 아무것도 안썻을때랑 /일때 적용되는 것을 의미함 
 	// 컨트롤러에서 어떻게 세션을 찾는지(내가만든 게 아닌 시큐리티 자체 세션인데?)@AuthenticationPrincipal을 사용한다
 	//@AuthenticationPrincipal PrincipalDetail principal
-	public String index(Model model,@PageableDefault(size=2,sort="id",direction = Sort.Direction.DESC) Pageable pageable) { 
+	public String index(Model model,@PageableDefault(size=5,sort="id",direction = Sort.Direction.DESC) Pageable pageable) { 
 		model.addAttribute("boards",boardService.글목록(pageable));
 		return "index";
 	}

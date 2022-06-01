@@ -13,9 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,7 +48,9 @@ public class Board {
 	@JoinColumn(name="userId")
 	private User user;//유저의 아이디값으로 select 혹은 join을 한다 근데  ORM은 key값으로 찾는(Foreign Key)게 아닌 
 	
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(mappedBy="board" ,fetch = FetchType.EAGER)//mappedBy는 연관관계의 주인이아니다.(FK가 아니다란 뜻)
+	@JsonIgnoreProperties({"board"})
+	@OrderBy("id desc")
 	private List<Reply> reply;
 	  
 	@CreationTimestamp

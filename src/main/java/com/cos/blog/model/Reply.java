@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.cos.blog.dto.ReplyRequestDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -43,4 +45,10 @@ public class Reply {
 	
 	@CreationTimestamp
 	private Timestamp createDate;
+	// 이방식은 service 에 build 대신 Reply reply = new Reply() update 문을 가져와서 필요한 객체만 넣어주는 형식을 쓸때 사용  
+	//public void update(ReplyDto reply) {
+	//	setUser(user);
+	//	setBoard(board);
+	//	setContent(content);
+	//}
 }

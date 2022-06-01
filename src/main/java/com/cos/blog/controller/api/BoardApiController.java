@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.blog.config.auth.PrincipalDetail;
+import com.cos.blog.dto.ReplyRequestDto;
 import com.cos.blog.dto.ResponseDto;
 import com.cos.blog.model.Board;
+import com.cos.blog.model.Reply;
 import com.cos.blog.service.BoardService;
 
 @RestController
@@ -37,4 +39,14 @@ public class BoardApiController {
 		boardService.글수정하기(id,board);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
 	}
+	
+	@PostMapping("/api/board/{boardId}/reply")
+	public ResponseDto<Integer> replySave(@RequestBody ReplyRequestDto reply) {
+		//댓글쓰기를 할때 reply를 만들어서 댓글쓰기를 해야한다  reply에 현재 content만있다
+
+		boardService.댓글쓰기(reply);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(),1); 
+	}
+	
+	
 }
