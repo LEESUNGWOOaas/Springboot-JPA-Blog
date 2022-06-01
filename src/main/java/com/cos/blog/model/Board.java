@@ -3,6 +3,7 @@ package com.cos.blog.model;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -48,7 +49,7 @@ public class Board {
 	@JoinColumn(name="userId")
 	private User user;//유저의 아이디값으로 select 혹은 join을 한다 근데  ORM은 key값으로 찾는(Foreign Key)게 아닌 
 	
-	@OneToMany(mappedBy="board" ,fetch = FetchType.EAGER)//mappedBy는 연관관계의 주인이아니다.(FK가 아니다란 뜻)
+	@OneToMany(mappedBy="board" ,fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)//mappedBy는 연관관계의 주인이아니다.(FK가 아니다란 뜻)
 	@JsonIgnoreProperties({"board"})
 	@OrderBy("id desc")
 	private List<Reply> reply;

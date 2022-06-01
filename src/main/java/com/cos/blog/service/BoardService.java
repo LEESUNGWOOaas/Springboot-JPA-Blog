@@ -82,4 +82,8 @@ public class BoardService {
 		replyRepository.mSave(replyRequestDto.getUserId(),replyRequestDto.getBoardId(),replyRequestDto.getContent());
 		
 	}
+	public void 댓글삭제(int replyId) {
+		// TODO Auto-generated method stub
+		replyRepository.deleteById(replyId);
+	}
 }

@@ -103,6 +103,24 @@ let index ={
 		});
 	
 	},
+	
+	
+	replyDelete:function(boardId,replyId){
+			$.ajax({	
+			type:"Delete",
+			url:`/api/board/${boardId}/reply/${replyId}`, 
+			/*data:JSON.stringify(data),
+			contentType:"application/json; charset=utf-8",  데이터가 필요없어서 필요없다*/
+			dataType:"json" 
+		}).done(function(resp){ 
+			console.log(resp);
+			alert("댓글 삭제가 완료되었습니다.");
+			location.href=`/board/${boardId}`;
+		}).fail(function(error){
+			alert(JSON.stringify(error));
+		});
+	
+	},
 }
 
 index.init();

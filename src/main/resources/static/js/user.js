@@ -33,8 +33,12 @@ let index ={
 		}).done(function(resp){ // 회원 가입이 정상으로 되는 데이터 전송시 resp로 1이 리턴 
 			//응답에 성공 (done을 실행)
 			console.log(resp);
-			alert("회원가입이 되었습니다.");
-			location.href="/";
+			if(resp.status == 500){
+				alert("회원가입이 실패했습니다.");
+			}else{				
+			 alert("회원가입이 되었습니다.");
+			 location.href="/";
+			}
 		}).fail(function(error){
 			//응답에 실패 (fail실행)
 			alert(JSON.stringify(error)); //에러를 json으로 날라오게 한다.
